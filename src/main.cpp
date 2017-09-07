@@ -6,10 +6,10 @@
 
 struct JobHolder {
   void (*jobs[MAX_JOBS])() = {
-    IAmAJob,
+    loopFlash,
     jobWifi
   };
-  short jobTimers[MAX_JOBS] = {2000, 500}; // Time in millis to trigger job at
+  short jobTimers[MAX_JOBS] = {100, 500}; // Time in millis to trigger job at
   short timeSinceJob[MAX_JOBS] = {0}; // Keeps track of elapsed time since last job check
   short lastMillis = 0; // Track the last time we checked times
 };
@@ -19,7 +19,7 @@ struct JobHolder jobs;
 void setup(){
   Serial.begin(115200);
   Serial.println("Setting up arduino");
-  Serial.printf("Last millis is %f\n", jobs.lastMillis);
+  Serial.printf("Last millis is %d\n", jobs.lastMillis);
   setupWifi();
 }
 

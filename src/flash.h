@@ -1,4 +1,4 @@
 #include "Arduino.h"
 
-void IAmAJob();
-void IAmASecondJob();
+void setupFlash();
+void loopFlash();
