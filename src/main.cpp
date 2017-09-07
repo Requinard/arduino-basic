@@ -1,21 +1,26 @@
 #include "Arduino.h"
 #include "flash.h"
-
+#include "wifi.h"
+#include <ESP8266WiFi.h>
 #define MAX_JOBS 2
 
 struct JobHolder {
-  void (*jobs[MAX_JOBS])() = {IAmAJob, IAmASecondJob};
-  short jobTimers[MAX_JOBS] = {2000, 10000}; // Time in millis to trigger job at
-  short timeSinceJob[MAX_JOBS] = {0};
-  short lastMillis = 0;
+  void (*jobs[MAX_JOBS])() = {
+    IAmAJob,
+    jobWifi
+  };
+  short jobTimers[MAX_JOBS] = {2000, 500}; // Time in millis to trigger job at
+  short timeSinceJob[MAX_JOBS] = {0}; // Keeps track of elapsed time since last job check
+  short lastMillis = 0; // Track the last time we checked times
 };
 
 struct JobHolder jobs;
 
 void setup(){
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Setting up arduino");
   Serial.printf("Last millis is %f\n", jobs.lastMillis);
+  setupWifi();
 }
 
 void loop(){
@@ -23,9 +28,9 @@ void loop(){
   // If last was 200 and it's 300 now, the diff is 100
   short now = millis();
   short timeDiff = now - jobs.lastMillis;
+
   jobs.lastMillis = now;
 
-  // Update the job timers
   for(int i = 0; i< MAX_JOBS; i++){
     // Update time diffs
     jobs.timeSinceJob[i] += timeDiff;
