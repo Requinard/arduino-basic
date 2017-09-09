@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include "settings.h"
 
 /* Set these to your desired credentials. */
 const char *ssid = "requisuit";
@@ -16,7 +17,7 @@ void setupWifi(){
 	// Connect to WiFi network
 	delay(1000);
 	Serial.println();
-	Serial.print("Configuring access point...");
+	Serial.print("WIFI: Configuring access point...");
 	/* You can remove the password parameter if you want the AP to be open. */
 	WiFi.softAP(ssid, password);
 
@@ -25,7 +26,7 @@ void setupWifi(){
 	Serial.println(myIP);
 	server.on("/", handleRoot);
 	server.begin();
-	Serial.println("HTTP server started");
+	Serial.println("WIFI: HTTP server started");
 }
 
 void jobWifi(){
