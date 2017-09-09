@@ -3,8 +3,8 @@
 #include <ESP8266WebServer.h>
 
 /* Set these to your desired credentials. */
-const char *ssid = "DnD The MMO RPG Adventure";
-const char *password = "runescape";
+const char *ssid = "requisuit";
+const char *password = "prinspils";
 
 ESP8266WebServer server(80);
 
@@ -13,30 +13,21 @@ void handleRoot() {
 }
 
 void setupWifi(){
-  // Connect to WiFi network
-Serial.println();
-Serial.println();
-Serial.print("Connecting to ");
-Serial.println(ssid);
+	// Connect to WiFi network
+	delay(1000);
+	Serial.println();
+	Serial.print("Configuring access point...");
+	/* You can remove the password parameter if you want the AP to be open. */
+	WiFi.softAP(ssid, password);
 
-WiFi.begin(ssid, password);
-
-while (WiFi.status() != WL_CONNECTED) {
-  delay(500);
-  Serial.print(".");
-}
-Serial.println("");
-Serial.println("WiFi connected");
-
-// Start the server
-server.begin();
-server.on("/", handleRoot);
-Serial.println("Server started");
-
-// Print the IP address
-Serial.println(WiFi.localIP());
+	IPAddress myIP = WiFi.softAPIP();
+	Serial.print("AP IP address: ");
+	Serial.println(myIP);
+	server.on("/", handleRoot);
+	server.begin();
+	Serial.println("HTTP server started");
 }
 
 void jobWifi(){
-  server.handleClient();
+	server.handleClient();
 }
