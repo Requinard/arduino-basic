@@ -1,4 +1,4 @@
-update=Sat 09 Sep 2017 10:00:20 PM CEST
+update=Sun 10 Sep 2017 05:19:58 PM CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,5 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=/home/requinard/kicad/libraries/kicad-lib/nodemcu
+LibName31=/home/requinard/kicad/libraries/nodemcu_v2
+LibName32=/home/requinard/kicad/libraries/kicad-lib/sensors
