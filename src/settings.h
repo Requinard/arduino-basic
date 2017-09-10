@@ -10,9 +10,8 @@ typedef struct {
 } RGB;
 
 typedef struct {
-  RGB leftCheek;
-  RGB rightCheek;
-  bool operationInProgress = false; 
+  RGB cheek;
+  bool operationInProgress = false;
 } Cheeks;
 
 struct Settings {

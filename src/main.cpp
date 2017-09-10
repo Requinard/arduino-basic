@@ -16,13 +16,12 @@ struct JobHolder {
 };
 
 struct JobHolder jobs;
-Settings settings;
 
 void setup(){
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW);
   Serial.begin(115200);
   Serial.println("Powering on suit");
-  Serial.print("Left cheeks blue value is ");
-  Serial.println((int)settings.cheeks.leftCheek.b);
 
   setupWifi();
 }
