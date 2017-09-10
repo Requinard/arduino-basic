@@ -2,15 +2,17 @@
 #include "flash.h"
 #include "wifi.h"
 #include "settings.h"
+#include "lightshow.h"
 #include <ESP8266WiFi.h>
-#define MAX_JOBS 2
+#define MAX_JOBS 3
 
 struct JobHolder {
   void (*jobs[MAX_JOBS])() = {
     loopFlash,
-    jobWifi
+    jobWifi,
+    loopLightshow
   };
-  short jobTimers[MAX_JOBS] = {10, 500}; // Time in millis to trigger job at
+  short jobTimers[MAX_JOBS] = {10, 500, 50}; // Time in millis to trigger job at
   short timeSinceJob[MAX_JOBS] = {0}; // Keeps track of elapsed time since last job check
   short lastMillis = 0; // Track the last time we checked times
 };
@@ -24,6 +26,7 @@ void setup(){
   Serial.println("Powering on suit");
 
   setupWifi();
+  setupLightshow();
 }
 
 void loop(){

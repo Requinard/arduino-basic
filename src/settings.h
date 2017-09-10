@@ -4,13 +4,14 @@
 
 // Initialize to white
 typedef struct {
-  char r = 255;
-  char g = 255;
-  char b = 255;
+  unsigned char r = 255;
+  unsigned char g = 255;
+  unsigned char b = 255;
 } RGB;
 
 typedef struct {
-  RGB cheek;
+  RGB target;
+  RGB current;
   bool operationInProgress = false;
 } Cheeks;
 

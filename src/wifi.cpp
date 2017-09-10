@@ -33,13 +33,9 @@ void handleCheeks(){
 		server.argName(2) == "blue"
 	)) {
 		Serial.println("Received correct parameters. Setting");
-		settings.cheeks.cheek.r = (char) server.arg(0).toInt();
-		settings.cheeks.cheek.g = (char)server.arg(1).toInt();
-		settings.cheeks.cheek.b = (char)server.arg(2).toInt();
-
-		analogWrite(D4, settings.cheeks.cheek.r);
-		analogWrite(D3, settings.cheeks.cheek.g);
-		analogWrite(D2, settings.cheeks.cheek.b);
+		settings.cheeks.target.r = (char) server.arg(0).toInt();
+		settings.cheeks.target.g = (char)server.arg(1).toInt();
+		settings.cheeks.target.b = (char)server.arg(2).toInt();
 
 		server.send(200, "text/plain", "Changed Cheek settings");
 	} else {
